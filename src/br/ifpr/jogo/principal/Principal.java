@@ -11,7 +11,7 @@ public class Principal extends JFrame {
         setTitle("Space Invaders");
         setLocationRelativeTo((null));
         setDefaultCloseOperation(ABORT);
-        setBackground("black");
+        
 
     }
 
