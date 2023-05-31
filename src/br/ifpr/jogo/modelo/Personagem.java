@@ -2,6 +2,7 @@ package br.ifpr.jogo.modelo;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 public class Personagem {
     private int posicaoX;
     private int posicaoY;
@@ -11,15 +12,53 @@ public class Personagem {
     private int larguraImagem;
     private int alturaImagem;
     public Personagem(){
-        this.posicaoX=960;
-        this.posicaoY=540;
+        this.posicaoX=0;
+        this.posicaoY=0;
         
     }
     public void carregar(){
-        ImageIcon carregar = new ImageIcon("C:\\Users\\Aluno\\Desktop\\jogo-space-invaders-main\\src\\br\\ifpr\\jogo\\arquivos\\nave.jpg");
+        ImageIcon carregar = new ImageIcon("C:\\Users\\gusta\\Documents\\workspace-eclipse\\jogo-space-invaders\\src\\br\\ifpr\\jogo\\arquivos\\psg_1.png");
         this.imagemPersonagem = carregar.getImage();
         this.alturaImagem=this.imagemPersonagem.getWidth(null);
         this.larguraImagem=this.imagemPersonagem.getHeight(null);
+    }
+
+    public void update(){
+        posicaoX += deslocamentoX;
+        posicaoY += deslocamentoY;
+        
+    }
+    public void keyPressed(KeyEvent tecla){
+        int movimentacao = tecla.getKeyCode();
+        if(movimentacao == KeyEvent.VK_W){
+            setDeslocamentoY(-3);
+        }
+        if(movimentacao == KeyEvent.VK_S){
+            setDeslocamentoY(3);
+        }
+        if(movimentacao == KeyEvent.VK_A){
+            setDeslocamentoX(-3);
+        }
+        if(movimentacao == KeyEvent.VK_D){
+            setDeslocamentoX(3);
+        }
+
+    }
+    public void keyReleased(KeyEvent tecla){
+        int movimentacao = tecla.getKeyCode();
+        if(movimentacao == KeyEvent.VK_W){
+            setDeslocamentoY(0);
+        }
+        if(movimentacao == KeyEvent.VK_S){
+            setDeslocamentoY(0);
+        }
+        if(movimentacao == KeyEvent.VK_A){
+            setDeslocamentoX(0);
+        }
+        if(movimentacao == KeyEvent.VK_D){
+            setDeslocamentoX(0);
+        }
+
     }
 
   

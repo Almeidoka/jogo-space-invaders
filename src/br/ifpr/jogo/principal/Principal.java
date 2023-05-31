@@ -1,16 +1,17 @@
 package br.ifpr.jogo.principal;
-
-import java.security.Permission;
-
+import br.ifpr.jogo.modelo.Fase;
 import javax.swing.JFrame;
 
 public class Principal extends JFrame {
     public Principal() {
+        Fase fase = new Fase();
+        super.add(fase);
         setVisible(true);
-        setSize(1920, 1080);
+        setSize(500, 318);
         setTitle("Space Invaders");
         setLocationRelativeTo((null));
-        setDefaultCloseOperation(ABORT);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
     }
