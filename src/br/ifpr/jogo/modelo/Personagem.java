@@ -3,6 +3,7 @@ package br.ifpr.jogo.modelo;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+
 public class Personagem {
     private int posicaoX;
     private int posicaoY;
@@ -11,57 +12,94 @@ public class Personagem {
     private Image imagemPersonagem;
     private int larguraImagem;
     private int alturaImagem;
-    public Personagem(){
-        this.posicaoX=0;
-        this.posicaoY=0;
-        
+    private int velocidadeDeDeslocamente = 3;
+
+    /* Criação de constante */
+    private static final int POSICAO_INICIAL_X = 100;
+    private static final int POSICAO_INICIAL_Y = 100;
+
+    public Personagem() {
+        this.posicaoX = POSICAO_INICIAL_X;
+        this.posicaoY = POSICAO_INICIAL_Y;
+        this.velocidadeDeDeslocamente = velocidadeDeDeslocamente;
+
     }
-    public void carregar(){
-        ImageIcon carregar = new ImageIcon("C:\\Users\\gusta\\Documents\\workspace-eclipse\\jogo-space-invaders\\src\\br\\ifpr\\jogo\\arquivos\\psg_1.png");
+
+    public void carregar() {
+        ImageIcon carregar = new ImageIcon(
+                "arquivos\\psg_1.png");
         this.imagemPersonagem = carregar.getImage();
-        this.alturaImagem=this.imagemPersonagem.getWidth(null);
-        this.larguraImagem=this.imagemPersonagem.getHeight(null);
+        this.alturaImagem = this.imagemPersonagem.getWidth(null);
+        this.larguraImagem = this.imagemPersonagem.getHeight(null);
     }
 
-    public void update(){
-        posicaoX += deslocamentoX;
-        posicaoY += deslocamentoY;
-        
-    }
-    public void keyPressed(KeyEvent tecla){
-        int movimentacao = tecla.getKeyCode();
-        if(movimentacao == KeyEvent.VK_W){
-            setDeslocamentoY(-3);
-        }
-        if(movimentacao == KeyEvent.VK_S){
-            setDeslocamentoY(3);
-        }
-        if(movimentacao == KeyEvent.VK_A){
-            setDeslocamentoX(-3);
-        }
-        if(movimentacao == KeyEvent.VK_D){
-            setDeslocamentoX(3);
+    public void update() {
+
+        if (posicaoX < 1) {
+            this.posicaoX = posicaoX + 3;
+        } else if (posicaoX > 480) {
+            this.posicaoX = posicaoX - 3;
+        } else if (posicaoY < 1) {
+            this.posicaoX = posicaoX + 3;
+        } else if (posicaoY > 300) {
+            this.posicaoX = posicaoX - 3;
+        } else {
+            this.posicaoX += this.deslocamentoX;
+            this.posicaoY += this.deslocamentoY;
         }
 
     }
-    public void keyReleased(KeyEvent tecla){
+
+    public void keyPressed(KeyEvent tecla) {
         int movimentacao = tecla.getKeyCode();
-        if(movimentacao == KeyEvent.VK_W){
+        if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
+            this.deslocamentoY -= velocidadeDeDeslocamente;
+        }
+        if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
+            this.deslocamentoY += velocidadeDeDeslocamente;
+        }
+        if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
+            this.deslocamentoX -= velocidadeDeDeslocamente;
+        }
+        if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
+            this.deslocamentoX += velocidadeDeDeslocamente;
+        }
+
+    }
+
+    public void parar(KeyEvent tecla) {
+        int movimentacao = tecla.getKeyCode();
+        if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
+            this.deslocamentoY = 0;
+        }
+        if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
+            this.deslocamentoY = 0;
+        }
+        if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
+            this.deslocamentoX = 0;
+        }
+        if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
+            this.deslocamentoX = 0;
+        }
+
+    }
+
+    public void keyReleased(KeyEvent tecla) {
+        int movimentacao = tecla.getKeyCode();
+        if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
             setDeslocamentoY(0);
         }
-        if(movimentacao == KeyEvent.VK_S){
+        if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
             setDeslocamentoY(0);
         }
-        if(movimentacao == KeyEvent.VK_A){
+        if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
             setDeslocamentoX(0);
         }
-        if(movimentacao == KeyEvent.VK_D){
+        if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
             setDeslocamentoX(0);
         }
 
     }
-
-  
 
     public int getPosicaoX() {
         return this.posicaoX;
@@ -118,6 +156,5 @@ public class Personagem {
     public void setAlturaImagem(int alturaImagem) {
         this.alturaImagem = alturaImagem;
     }
-
 
 }
