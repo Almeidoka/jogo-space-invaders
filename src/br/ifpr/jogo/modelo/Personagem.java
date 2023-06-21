@@ -12,16 +12,15 @@ public class Personagem {
     private Image imagemPersonagem;
     private int larguraImagem;
     private int alturaImagem;
-    private int velocidadeDeDeslocamente = 3;
 
     /* Criação de constante */
     private static final int POSICAO_INICIAL_X = 100;
     private static final int POSICAO_INICIAL_Y = 100;
+    private static final int VELOCIDADE_DE_DESLOCAMENTO = 3;
 
     public Personagem() {
         this.posicaoX = POSICAO_INICIAL_X;
         this.posicaoY = POSICAO_INICIAL_Y;
-        this.velocidadeDeDeslocamente = velocidadeDeDeslocamente;
 
     }
 
@@ -37,12 +36,12 @@ public class Personagem {
 
         if (posicaoX < 1) {
             this.posicaoX = posicaoX + 3;
-        } else if (posicaoX > 480) {
+        } else if (posicaoX > 440) {
             this.posicaoX = posicaoX - 3;
         } else if (posicaoY < 1) {
-            this.posicaoX = posicaoX + 3;
-        } else if (posicaoY > 300) {
-            this.posicaoX = posicaoX - 3;
+            this.posicaoY = posicaoY + 3;
+        } else if (posicaoY > 240) {
+            this.posicaoY = posicaoY - 3;
         } else {
             this.posicaoX += this.deslocamentoX;
             this.posicaoY += this.deslocamentoY;
@@ -53,33 +52,16 @@ public class Personagem {
     public void keyPressed(KeyEvent tecla) {
         int movimentacao = tecla.getKeyCode();
         if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
-            this.deslocamentoY -= velocidadeDeDeslocamente;
+            this.deslocamentoY -= VELOCIDADE_DE_DESLOCAMENTO;
         }
         if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
-            this.deslocamentoY += velocidadeDeDeslocamente;
+            this.deslocamentoY += VELOCIDADE_DE_DESLOCAMENTO;
         }
         if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
-            this.deslocamentoX -= velocidadeDeDeslocamente;
+            this.deslocamentoX -= VELOCIDADE_DE_DESLOCAMENTO;
         }
         if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
-            this.deslocamentoX += velocidadeDeDeslocamente;
-        }
-
-    }
-
-    public void parar(KeyEvent tecla) {
-        int movimentacao = tecla.getKeyCode();
-        if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
-            this.deslocamentoY = 0;
-        }
-        if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
-            this.deslocamentoY = 0;
-        }
-        if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
-            this.deslocamentoX = 0;
-        }
-        if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
-            this.deslocamentoX = 0;
+            this.deslocamentoX += VELOCIDADE_DE_DESLOCAMENTO;
         }
 
     }
@@ -88,14 +70,11 @@ public class Personagem {
         int movimentacao = tecla.getKeyCode();
         if (movimentacao == KeyEvent.VK_W || movimentacao == KeyEvent.VK_UP) {
             setDeslocamentoY(0);
-        }
-        if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
+        } else if (movimentacao == KeyEvent.VK_S || movimentacao == KeyEvent.VK_DOWN) {
             setDeslocamentoY(0);
-        }
-        if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
+        } else if (movimentacao == KeyEvent.VK_A || movimentacao == KeyEvent.VK_LEFT) {
             setDeslocamentoX(0);
-        }
-        if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
+        } else if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
             setDeslocamentoX(0);
         }
 

@@ -17,20 +17,20 @@ public class Fase extends JPanel implements ActionListener {
     private Personagem personagem;
     private Image imagemDeFundo;
     private Timer timer;
-    private static final int DESLOCAMENTO = 3;
+    public static final int DESLOCAMENTO = 3;
+    public static final int DELEY = 10;
 
     public Fase() {
         setFocusable(true);
         setDoubleBuffered(true);
-        ImageIcon carregando = new ImageIcon(
-                "arquivos\\template.png");
+        ImageIcon carregando = new ImageIcon("arquivos\\template.png");
         this.imagemDeFundo = carregando.getImage();
-
         this.personagem = new Personagem();
         this.personagem.carregar();
         addKeyListener(new TecladoAdapter());
-        timer = new Timer(5, this);
+        timer = new Timer(DELEY, this);
         timer.start();
+
     }
 
     public void paint(Graphics g) {
@@ -47,10 +47,12 @@ public class Fase extends JPanel implements ActionListener {
     }
 
     private class TecladoAdapter extends KeyAdapter {
+        @Override
         public void keyPressed(KeyEvent e) {
             personagem.keyPressed(e);
         }
 
+        @Override
         public void keyReleased(KeyEvent e) {
             personagem.keyReleased(e);
         }
