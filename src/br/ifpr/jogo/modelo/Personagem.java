@@ -24,6 +24,8 @@ public class Personagem {
     public Personagem() {
         this.posicaoX = POSICAO_INICIAL_X;
         this.posicaoY = POSICAO_INICIAL_Y;
+
+        //
         tiro = new ArrayList<Tiro>();
 
     }
@@ -36,6 +38,7 @@ public class Personagem {
         this.larguraImagem = this.imagemPersonagem.getHeight(null);
     }
 
+    //código de movimenta e códgo extra para adicionar colisão (Adaptado)
     public void update() {
 
         if (posicaoX < 1) {
@@ -52,7 +55,9 @@ public class Personagem {
         }
 
     }
-    public void tiroS(){
+
+    //crição de um novo tiro, que será utilizado dentro do keypressed
+    public void tiros(){
         this.tiro.add(new Tiro(posicaoX+larguraImagem, (posicaoY+alturaImagem/2)));
     }
 
@@ -71,7 +76,7 @@ public class Personagem {
             this.deslocamentoX += VELOCIDADE_DE_DESLOCAMENTO;
         }
         if (movimentacao == KeyEvent.VK_SPACE) {
-            tiroS();
+            tiros();
         }
 
     }

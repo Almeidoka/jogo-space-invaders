@@ -39,6 +39,7 @@ public class Fase extends JPanel implements ActionListener {
         Graphics2D graficos = (Graphics2D) g;
         graficos.drawImage(this.imagemDeFundo, 0, 0, null);
         graficos.drawImage(personagem.getImagemPersonagem(), personagem.getPosicaoX(), personagem.getPosicaoY(), this);
+        //implementando o tiro no personagem
         List<Tiro> tiro = personagem.getTiro();
         for(int i=0;i<tiro.size();i++){
             Tiro m = tiro.get(i);
