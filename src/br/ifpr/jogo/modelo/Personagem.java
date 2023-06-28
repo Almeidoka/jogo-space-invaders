@@ -3,6 +3,8 @@ package br.ifpr.jogo.modelo;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Personagem {
     private int posicaoX;
@@ -12,6 +14,7 @@ public class Personagem {
     private Image imagemPersonagem;
     private int larguraImagem;
     private int alturaImagem;
+    private List <Tiro> tiro;
 
     /* Criação de constante */
     private static final int POSICAO_INICIAL_X = 100;
@@ -21,6 +24,7 @@ public class Personagem {
     public Personagem() {
         this.posicaoX = POSICAO_INICIAL_X;
         this.posicaoY = POSICAO_INICIAL_Y;
+        tiro = new ArrayList<Tiro>();
 
     }
 
@@ -48,6 +52,9 @@ public class Personagem {
         }
 
     }
+    public void tiroS(){
+        this.tiro.add(new Tiro(posicaoX+larguraImagem, (posicaoY+alturaImagem/2)));
+    }
 
     public void keyPressed(KeyEvent tecla) {
         int movimentacao = tecla.getKeyCode();
@@ -62,6 +69,9 @@ public class Personagem {
         }
         if (movimentacao == KeyEvent.VK_D || movimentacao == KeyEvent.VK_RIGHT) {
             this.deslocamentoX += VELOCIDADE_DE_DESLOCAMENTO;
+        }
+        if (movimentacao == KeyEvent.VK_SPACE) {
+            tiroS();
         }
 
     }
@@ -135,5 +145,14 @@ public class Personagem {
     public void setAlturaImagem(int alturaImagem) {
         this.alturaImagem = alturaImagem;
     }
+
+    public List<Tiro> getTiro() {
+        return tiro;
+    }
+
+    public void setTiro(List<Tiro> tiro) {
+        this.tiro = tiro;
+    }
+    
 
 }

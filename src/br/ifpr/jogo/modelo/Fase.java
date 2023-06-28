@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class Fase extends JPanel implements ActionListener {
     private Personagem personagem;
     private Image imagemDeFundo;
     private Timer timer;
+
     public static final int DESLOCAMENTO = 3;
     public static final int DELEY = 10;
 
@@ -37,12 +39,27 @@ public class Fase extends JPanel implements ActionListener {
         Graphics2D graficos = (Graphics2D) g;
         graficos.drawImage(this.imagemDeFundo, 0, 0, null);
         graficos.drawImage(personagem.getImagemPersonagem(), personagem.getPosicaoX(), personagem.getPosicaoY(), this);
-
+        List<Tiro> tiro = personagem.getTiro();
+        for(int i=0;i<tiro.size();i++){
+            Tiro m = tiro.get(i);
+            m.load();
+            graficos.drawImage(m.getImagem(), m.getX(), m.getY(),this);
+            
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         personagem.update();
+        List<Tiro> tiro = personagem.getTiro();
+        for(int i=0;i<tiro.size();i++){
+            Tiro m = tiro.get(i);
+            if(m.isVisivel()){
+                m.update();
+            }else{
+                tiro.remove(i);
+            }
+        }
         repaint();
     }
 
